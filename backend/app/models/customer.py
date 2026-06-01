@@ -1,11 +1,7 @@
-# pyrefly: ignore [missing-import]
 from sqlalchemy import Column, Integer, String, DateTime
-# pyrefly: ignore [missing-import]
 from sqlalchemy.sql import func
-# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import relationship
 from app.core.database import Base
-
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -15,8 +11,7 @@ class Customer(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     phone = Column(String, nullable=True)
     hashed_password = Column(String, nullable=False, server_default="")
-    
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    # One-to-many relationship to orders
     orders = relationship("Order", back_populates="customer", cascade="all, delete-orphan")
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

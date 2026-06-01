@@ -10,7 +10,6 @@ export default function DashboardOverview() {
   const [success, setSuccess] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-
   const fetchAnalytics = async (silent = false) => {
     if (!silent) {
       setLoading(true);
@@ -35,8 +34,7 @@ export default function DashboardOverview() {
 
   useEffect(() => {
     fetchAnalytics();
-    
-    // Auto-refresh metrics every 10 seconds silently
+
     const interval = setInterval(() => {
       fetchAnalytics(true);
     }, 10000);
@@ -46,7 +44,6 @@ export default function DashboardOverview() {
 
   return (
     <div className="tab-pane overview-pane animate-fade-in">
-      {/* View Header with Breadcrumbs & Title */}
       <div className="view-header">
         <div className="header-meta">
           <span className="header-breadcrumbs">Workspace / Overview</span>
@@ -57,9 +54,9 @@ export default function DashboardOverview() {
             <span className="live-dot"></span>
             <span className="live-text">Live Sync</span>
           </div>
-          <button 
-            className={`icon-btn refresh-btn ${isRefreshing ? "spinning" : ""}`} 
-            onClick={() => fetchAnalytics()} 
+          <button
+            className={`icon-btn refresh-btn ${isRefreshing ? "spinning" : ""}`}
+            onClick={() => fetchAnalytics()}
             title="Refresh Stats"
           >
             <RefreshCw size={18} />
@@ -70,8 +67,6 @@ export default function DashboardOverview() {
         </div>
       </div>
 
-
-      {/* Notifications */}
       {error && (
         <div className="alert-message error-alert animate-fade-in">
           <AlertTriangle size={18} />
@@ -86,7 +81,6 @@ export default function DashboardOverview() {
         </div>
       ) : analytics ? (
         <>
-          {/* 6 Glowing Analytics KPI Widgets */}
           <div className="analytics-grid">
             <div className="kpi-card">
               <div className="kpi-icon-wrap bg-indigo">
@@ -149,9 +143,7 @@ export default function DashboardOverview() {
             </div>
           </div>
 
-          {/* Sub Split Panels (Recent Orders vs Low Stock) */}
           <div className="overview-split">
-            {/* Recent Orders Panel */}
             <div className="split-panel glass-card-panel">
               <h3 className="panel-title">Recent Fulfillment Orders</h3>
               {analytics.recent_orders.length === 0 ? (
@@ -188,7 +180,6 @@ export default function DashboardOverview() {
               )}
             </div>
 
-            {/* Low Stock Alerts Panel */}
             <div className="split-panel glass-card-panel">
               <div className="panel-header-alert">
                 <h3 className="panel-title">Low Stock System Alerts</h3>
@@ -222,7 +213,6 @@ export default function DashboardOverview() {
               )}
             </div>
 
-            {/* Top Selling Products Panel */}
             <div className="split-panel glass-card-panel">
               <div className="panel-header-alert">
                 <h3 className="panel-title">Top Selling Products</h3>

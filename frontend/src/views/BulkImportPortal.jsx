@@ -4,13 +4,12 @@ import { api } from "../utils/api";
 import "./BulkImportPortal.css";
 
 export default function BulkImportPortal() {
-  const [importType, setImportType] = useState("products"); // products vs customers
+  const [importType, setImportType] = useState("products");
   const [importFile, setImportFile] = useState(null);
-  
-  // Checking & committing states
+
   const [isValidating, setIsValidating] = useState(false);
   const [isCommitting, setIsCommitting] = useState(false);
-  const [importReport, setImportReport] = useState(null); // ImportValidationResult
+  const [importReport, setImportReport] = useState(null);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -64,7 +63,6 @@ export default function BulkImportPortal() {
         setSuccess(res.message || "Bulk records written successfully.");
         setImportReport(null);
         setImportFile(null);
-        // reset file input
         const fileInput = document.getElementById("import-file-input");
         if (fileInput) fileInput.value = "";
       } else {
@@ -79,7 +77,6 @@ export default function BulkImportPortal() {
 
   return (
     <div className="tab-pane import-pane animate-fade-in">
-      {/* View Header */}
       <div className="view-header">
         <div className="header-meta">
           <span className="header-breadcrumbs">Workspace / Ingestion Portal</span>
@@ -87,7 +84,6 @@ export default function BulkImportPortal() {
         </div>
       </div>
 
-      {/* Notifications */}
       {error && (
         <div className="alert-message error-alert animate-fade-in">
           <AlertTriangle size={18} />
@@ -105,7 +101,6 @@ export default function BulkImportPortal() {
       )}
 
       <div className="import-grid-layout">
-        {/* File Ingestion Settings */}
         <div className="import-setup-panel glass-card-panel">
           <h3 className="panel-title flex-align-logo">
             <UploadCloud size={20} className="header-logo-icon" /> Ingestion Target
@@ -192,7 +187,6 @@ export default function BulkImportPortal() {
           </form>
         </div>
 
-        {/* Validation MiddleWare Status Status Panel */}
         <div className="import-report-panel glass-card-panel">
           <h3 className="panel-title flex-align-logo">
             <ShieldCheck size={20} className="header-logo-icon" /> Middleware Validation Status
@@ -205,7 +199,6 @@ export default function BulkImportPortal() {
             </div>
           ) : (
             <div className="report-content-wrapper">
-              {/* Status status metrics */}
               <div className="report-summary-boxes">
                 <div className="sum-box">
                   <span className="sum-val">{importReport.summary.total_rows}</span>
@@ -225,7 +218,6 @@ export default function BulkImportPortal() {
                 </div>
               </div>
 
-              {/* Validation Diagnostics summary */}
               {importReport.is_valid ? (
                 <div className="report-alert-callout success-callout">
                   <CheckCircle size={20} className="callout-icon" />
@@ -244,7 +236,6 @@ export default function BulkImportPortal() {
                 </div>
               )}
 
-              {/* Rows Details diagnostic table */}
               {importReport.errors.length > 0 && (
                 <div className="report-errors-table-container">
                   <span className="table-header-lbl">Granular Error Breakdown:</span>
@@ -271,7 +262,6 @@ export default function BulkImportPortal() {
                 </div>
               )}
 
-              {/* Database write commit button */}
               <button
                 type="button"
                 className="primary-btn submit-btn commit-import-btn"

@@ -73,7 +73,6 @@ export default function Navbar({ currentCustomer, onLogout, theme, onThemeToggle
       </nav>
 
       <div className="navbar-utilities">
-        {/* Day/Night Theme Toggler Button */}
         <button
           className="navbar-icon-btn navbar-theme-btn"
           onClick={onThemeToggle}
@@ -82,13 +81,11 @@ export default function Navbar({ currentCustomer, onLogout, theme, onThemeToggle
           {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
-        {/* User Profile avatar chip */}
         <div className="navbar-profile-chip" title={`${currentCustomer?.name} - Administrator`}>
           <div className="navbar-avatar">{initials}</div>
           <span className="navbar-username">{currentCustomer?.name}</span>
         </div>
 
-        {/* Logout action */}
         <button className="navbar-logout-btn" onClick={onLogout} title="Sign Out Session">
           <LogOut size={16} />
           <span>Sign Out</span>

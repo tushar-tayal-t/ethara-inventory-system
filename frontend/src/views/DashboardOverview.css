@@ -71,7 +71,6 @@
   border-radius: 10px;
 }
 
-/* Alert Boxes style */
 .alert-message {
   display: flex;
   align-items: center;
@@ -132,7 +131,6 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Overview Tab Components */
 .tab-pane {
   display: flex;
   flex-direction: column;
@@ -180,7 +178,6 @@
   height: 22px;
 }
 
-/* KPI Accent Colors */
 .bg-indigo { background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.25); }
 .bg-indigo svg { color: var(--primary); }
 
@@ -195,7 +192,6 @@
 
 .bg-red { background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.25); }
 .bg-red svg { color: var(--danger); }
-
 
 .kpi-stats {
   display: flex;
@@ -218,14 +214,12 @@
   margin-top: 0.125rem;
 }
 
-/* Split layouts */
 .overview-split {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.75rem;
   min-height: 320px;
 }
-
 
 .glass-card-panel {
   background: var(--card-bg);
@@ -288,7 +282,6 @@
   border-radius: 8px;
 }
 
-/* Panel Lists styling */
 .alert-scroll-list {
   display: flex;
   flex-direction: column;
@@ -352,7 +345,6 @@
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
-/* Responsive Table styling */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -425,8 +417,6 @@
   }
 }
 
-
-/* Item badge styling */
 .item-badge {
   display: inline-block;
   background: rgba(99, 102, 241, 0.12);
@@ -438,7 +428,6 @@
   font-weight: 500;
 }
 
-/* Top sellers list */
 .top-sellers-list {
   display: flex;
   flex-direction: column;
@@ -505,8 +494,6 @@
   font-weight: 500;
 }
 
-
-/* Live Sync Indicator & Spinning Animation */
 .live-indicator {
   display: flex;
   align-items: center;
@@ -547,4 +534,3 @@
 .spinning svg {
   animation: spin 1s linear infinite;
 }
-

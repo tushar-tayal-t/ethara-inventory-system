@@ -4,14 +4,13 @@ import { api } from "../utils/api";
 import "./ServerStatusBanner.css";
 
 export default function ServerStatusBanner() {
-  const [status, setStatus] = useState("checking"); // checking, warning, ready, error, hidden
+  const [status, setStatus] = useState("checking");
   const [errorMsg, setErrorMsg] = useState("");
 
   const checkConnection = async () => {
     setStatus("checking");
     setErrorMsg("");
 
-    // Start a timer to show the "warning/waking up" state if it takes > 1.5s
     const warningTimer = setTimeout(() => {
       setStatus("warning");
     }, 1500);
@@ -19,17 +18,15 @@ export default function ServerStatusBanner() {
     try {
       await api.checkServerHealth();
       clearTimeout(warningTimer);
-      
-      // If it took longer than 1.5s (status became warning), show a "ready" state for a moment
+
       setStatus((currentStatus) => {
         if (currentStatus === "warning") {
-          // Keep the banner visible for a short time to confirm it woke up
           setTimeout(() => {
             setStatus("hidden");
           }, 3000);
           return "ready";
         }
-        return "hidden"; // Hide immediately if it was quick
+        return "hidden";
       });
     } catch (err) {
       clearTimeout(warningTimer);

@@ -5,22 +5,18 @@ import { api } from "../utils/api";
 import "./Signup.css";
 
 export default function Signup({ onToggle, onAuthSuccess }) {
-  // Form Field States
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  
-  // UI Interaction States
+
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [successData, setSuccessData] = useState(null); // stores parsed token/customer details on success
+  const [successData, setSuccessData] = useState(null);
 
-  // Live Field Focus States for Premium Borders
   const [activeField, setActiveField] = useState(null);
 
-  // Validate form entries client-side
   const validateForm = () => {
     if (!name.trim()) {
       setErrorMsg("Please enter your name.");
@@ -40,7 +36,7 @@ export default function Signup({ onToggle, onAuthSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -51,9 +47,9 @@ export default function Signup({ onToggle, onAuthSuccess }) {
         phone: phone.trim() ? phone : undefined,
         password
       };
-      
+
       const result = await api.registerCustomer(payload);
-      
+
       if (result.success) {
         setSuccessData(result.data);
       } else {
@@ -66,7 +62,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
     }
   };
 
-  // Reset page state to allow creating another user
   const handleReset = () => {
     setName("");
     setEmail("");
@@ -83,10 +78,10 @@ export default function Signup({ onToggle, onAuthSuccess }) {
           <CheckCircle2 className="success-icon" size={64} />
           <div className="success-glow"></div>
         </div>
-        
+
         <h2 className="success-title">Welcome Aboard!</h2>
         <p className="success-subtitle">Your customer account has been registered successfully.</p>
-        
+
         <div className="profile-preview">
           <div className="profile-item">
             <span className="profile-label">Name</span>
@@ -111,8 +106,8 @@ export default function Signup({ onToggle, onAuthSuccess }) {
           </div>
         </div>
 
-        <button 
-          className="primary-btn continue-btn" 
+        <button
+          className="primary-btn continue-btn"
           onClick={onAuthSuccess ? onAuthSuccess : handleReset}
         >
           {onAuthSuccess ? "Go to Dashboard" : "Create Another Account"} <ArrowRight size={18} />
@@ -123,7 +118,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
 
   return (
     <div className="signup-container">
-      {/* Brand Header */}
       <div className="brand-header">
         <div className="logo-glow">
           <Sparkles className="brand-logo" size={32} />
@@ -132,12 +126,10 @@ export default function Signup({ onToggle, onAuthSuccess }) {
         <p className="brand-slogan">Inventory & Fulfillment System by Tushar Tayal</p>
       </div>
 
-      {/* Main Glassmorphic Card */}
       <div className="glass-card">
         <h2 className="form-title">Create Account</h2>
         <p className="form-subtitle">Register to manage stock levels and create orders.</p>
 
-        {/* Global Error Banner */}
         {errorMsg && (
           <div className="error-banner">
             <ShieldAlert size={20} className="error-icon" />
@@ -146,8 +138,7 @@ export default function Signup({ onToggle, onAuthSuccess }) {
         )}
 
         <form onSubmit={handleSubmit} className="signup-form">
-          
-          {/* Full Name Input */}
+
           <div className={`input-group ${activeField === "name" ? "focused" : ""}`}>
             <label className="input-label">Full Name</label>
             <div className="input-wrapper">
@@ -165,7 +156,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Email Address Input */}
           <div className={`input-group ${activeField === "email" ? "focused" : ""}`}>
             <label className="input-label">Email Address</label>
             <div className="input-wrapper">
@@ -183,7 +173,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Phone Number Input */}
           <div className={`input-group ${activeField === "phone" ? "focused" : ""}`}>
             <label className="input-label">Phone Number <span className="label-optional">(Optional)</span></label>
             <div className="input-wrapper">
@@ -200,7 +189,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Secure Password Input */}
           <div className={`input-group ${activeField === "password" ? "focused" : ""}`}>
             <label className="input-label">Password</label>
             <div className="input-wrapper">
@@ -226,7 +214,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Submit Button */}
           <button type="submit" className="primary-btn submit-btn" disabled={isLoading}>
             {isLoading ? (
               <div className="spinner"></div>
@@ -238,7 +225,6 @@ export default function Signup({ onToggle, onAuthSuccess }) {
           </button>
         </form>
 
-        {/* Footer info */}
         <div className="card-footer">
           Already registered?{" "}
           <Link to="/login" className="link-text font-bold">

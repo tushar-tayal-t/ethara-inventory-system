@@ -4,7 +4,6 @@ from pydantic import BaseModel
 T = TypeVar("T")
 
 class ResponseEnvelope(BaseModel, Generic[T]):
-    """Standard generic API response envelope wrapper."""
     success: bool
     message: str
     error: Optional[str] = None

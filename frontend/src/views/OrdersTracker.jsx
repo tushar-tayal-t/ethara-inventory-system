@@ -4,28 +4,23 @@ import { api } from "../utils/api";
 import "./OrdersTracker.css";
 
 export default function OrdersTracker() {
-  // Orders & Data lists
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [customers, setCustomers] = useState([]);
 
-  // States
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Place Order Modal Forms
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orderCustomer, setOrderCustomer] = useState("");
   const [orderItems, setOrderItems] = useState([{ productId: "", quantity: 1 }]);
 
-  // Fetch all resources
   const fetchAllData = async () => {
     setLoading(true);
     setError("");
     try {
-      // Parallel loading
       const [resOrders, resProducts, resCustomers] = await Promise.all([
         api.getOrders(),
         api.getProducts(),
@@ -46,7 +41,6 @@ export default function OrdersTracker() {
     fetchAllData();
   }, []);
 
-  // Place Order handlers
   const handleAddField = () => {
     setOrderItems([...orderItems, { productId: "", quantity: 1 }]);
   };
@@ -81,7 +75,6 @@ export default function OrdersTracker() {
       return;
     }
 
-    // Verify stock client-side as a sanity check
     for (const item of cleanItems) {
       const match = products.find((p) => p.id === item.product_id);
       if (match && match.stock < item.quantity) {
@@ -103,7 +96,7 @@ export default function OrdersTracker() {
         setIsModalOpen(false);
         setOrderCustomer("");
         setOrderItems([{ productId: "", quantity: 1 }]);
-        fetchAllData(); // refresh stock and orders
+        fetchAllData();
       } else {
         setError(res.message || "Failed to launch fulfillment order.");
       }
@@ -114,7 +107,6 @@ export default function OrdersTracker() {
     }
   };
 
-  // Cancel/Delete Order
   const handleCancelOrder = async (id) => {
     if (!window.confirm("Are you sure you want to cancel this fulfillment order? Stock will be restored.")) return;
     setError("");
@@ -132,7 +124,6 @@ export default function OrdersTracker() {
     }
   };
 
-  // Change Order Status
   const handleStatusChange = async (id, newStatus) => {
     setError("");
     setSuccess("");
@@ -140,7 +131,7 @@ export default function OrdersTracker() {
       const res = await api.updateOrderStatus(id, newStatus);
       if (res.success) {
         setSuccess(res.message);
-        fetchAllData(); // refresh orders & stock
+        fetchAllData();
       } else {
         setError(res.message || "Failed to update order status.");
       }
@@ -149,10 +140,8 @@ export default function OrdersTracker() {
     }
   };
 
-
   return (
     <div className="tab-pane orders-pane animate-fade-in">
-      {/* View Header */}
       <div className="view-header">
         <div className="header-meta">
           <span className="header-breadcrumbs">Workspace / Orders</span>
@@ -165,14 +154,12 @@ export default function OrdersTracker() {
         </div>
       </div>
 
-      {/* Action Bar */}
       <div className="action-bar flex-end">
         <button className="primary-btn add-btn" onClick={() => setIsModalOpen(true)}>
           <Plus size={18} /> Place Fulfillment Order
         </button>
       </div>
 
-      {/* Notifications */}
       {error && (
         <div className="alert-message error-alert animate-fade-in">
           <AlertTriangle size={18} />
@@ -189,7 +176,6 @@ export default function OrdersTracker() {
         </div>
       )}
 
-      {/* Orders Grid */}
       {loading ? (
         <div className="pane-loader"><div className="spinner"></div></div>
       ) : orders.length === 0 ? (
@@ -252,7 +238,6 @@ export default function OrdersTracker() {
         </div>
       )}
 
-      {/* PLACE FULFILLMENT ORDER MODAL */}
       {isModalOpen && (
         <div className="modal-backdrop animate-fade-in">
           <div className="modal-drawer glass-card order-modal-drawer animate-scale-up">
@@ -266,7 +251,6 @@ export default function OrdersTracker() {
             </header>
 
             <form onSubmit={handleOrderSubmit} className="modal-form">
-              {/* Customer Account */}
               <div className="input-group">
                 <label className="input-label">Select Customer Account</label>
                 <div className="input-wrapper">
@@ -286,13 +270,11 @@ export default function OrdersTracker() {
                 </div>
               </div>
 
-              {/* Multi product scroll view list */}
               <div className="order-items-scroll-section">
                 <span className="input-label select-items-lbl">Select Products and Quantities:</span>
 
                 {orderItems.map((item, idx) => (
                   <div key={idx} className="order-item-selection-row">
-                    {/* Selector */}
                     <div className="select-product-wrap">
                       <select
                         className="modal-select-input"
@@ -309,7 +291,6 @@ export default function OrdersTracker() {
                       </select>
                     </div>
 
-                    {/* Qty */}
                     <div className="select-qty-wrap">
                       <input
                         type="number"
@@ -321,7 +302,6 @@ export default function OrdersTracker() {
                       />
                     </div>
 
-                    {/* Delete icon */}
                     <button
                       type="button"
                       className="remove-item-row-btn"

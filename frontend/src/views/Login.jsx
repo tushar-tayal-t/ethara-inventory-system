@@ -5,20 +5,16 @@ import { api } from "../utils/api";
 import "./Login.css";
 
 export default function Login({ onToggle, onAuthSuccess }) {
-  // Form Field States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  // UI Interaction States
+
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const [successData, setSuccessData] = useState(null); // stores parsed token/customer details on success
+  const [successData, setSuccessData] = useState(null);
 
-  // Live Field Focus States for Premium Borders
   const [activeField, setActiveField] = useState(null);
 
-  // Validate form entries client-side
   const validateForm = () => {
     if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
       setErrorMsg("Please enter a valid email address.");
@@ -34,7 +30,7 @@ export default function Login({ onToggle, onAuthSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg("");
-    
+
     if (!validateForm()) return;
 
     setIsLoading(true);
@@ -43,9 +39,9 @@ export default function Login({ onToggle, onAuthSuccess }) {
         email,
         password
       };
-      
+
       const result = await api.loginCustomer(payload);
-      
+
       if (result.success) {
         if (onAuthSuccess) {
           onAuthSuccess();
@@ -62,7 +58,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
     }
   };
 
-  // Reset page state to allow logging out / logging in again
   const handleReset = () => {
     setEmail("");
     setPassword("");
@@ -77,10 +72,10 @@ export default function Login({ onToggle, onAuthSuccess }) {
           <CheckCircle2 className="success-icon" size={64} />
           <div className="success-glow"></div>
         </div>
-        
+
         <h2 className="success-title">Welcome Back!</h2>
         <p className="success-subtitle font-sans">You have successfully authenticated via HTTP Bearer token.</p>
-        
+
         <div className="profile-preview">
           <div className="profile-item">
             <span className="profile-label">Name</span>
@@ -114,7 +109,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
 
   return (
     <div className="login-container">
-      {/* Brand Header */}
       <div className="brand-header">
         <div className="logo-glow">
           <Sparkles className="brand-logo" size={32} />
@@ -123,12 +117,10 @@ export default function Login({ onToggle, onAuthSuccess }) {
         <p className="brand-slogan">Inventory & Fulfillment System by Tushar Tayal</p>
       </div>
 
-      {/* Main Glassmorphic Card */}
       <div className="glass-card">
         <h2 className="form-title">Login</h2>
         <p className="form-subtitle">Enter your credentials to access the inventory system.</p>
 
-        {/* Global Error Banner */}
         {errorMsg && (
           <div className="error-banner">
             <ShieldAlert size={20} className="error-icon" />
@@ -137,7 +129,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
         )}
 
         <form onSubmit={handleSubmit} className="login-form">
-          {/* Email Address Input */}
           <div className={`input-group ${activeField === "email" ? "focused" : ""}`}>
             <label className="input-label">Email Address</label>
             <div className="input-wrapper">
@@ -155,7 +146,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Secure Password Input */}
           <div className={`input-group ${activeField === "password" ? "focused" : ""}`}>
             <label className="input-label">Password</label>
             <div className="input-wrapper">
@@ -181,7 +171,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
             </div>
           </div>
 
-          {/* Submit Button */}
           <button type="submit" className="primary-btn submit-btn" disabled={isLoading}>
             {isLoading ? (
               <div className="spinner"></div>
@@ -193,7 +182,6 @@ export default function Login({ onToggle, onAuthSuccess }) {
           </button>
         </form>
 
-        {/* Footer Toggle Link */}
         <div className="card-footer">
           Don't have an account?{" "}
           <Link to="/signup" className="link-text font-bold">

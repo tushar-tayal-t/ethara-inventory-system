@@ -1,40 +1,38 @@
-/* Import Google Fonts (Outfit for headings, Inter for body text) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* HSL Color System */
   --bg-color-h: 224;
   --bg-color-s: 47%;
   --bg-color-l: 7%;
-  --bg-color: hsl(var(--bg-color-h), var(--bg-color-s), var(--bg-color-l)); /* #070913 */
+  --bg-color: hsl(var(--bg-color-h), var(--bg-color-s), var(--bg-color-l));
 
   --primary-h: 245;
   --primary-s: 82%;
   --primary-l: 67%;
-  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l)); /* #6366f1 */
+  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
   --primary-hover: hsl(var(--primary-h), var(--primary-s), 58%);
   --primary-glow: rgba(99, 102, 241, 0.45);
 
   --secondary-h: 271;
   --secondary-s: 91%;
   --secondary-l: 65%;
-  --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l)); /* #8b5cf6 */
+  --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
   --secondary-glow: rgba(139, 92, 246, 0.4);
 
   --accent-h: 190;
   --accent-s: 95%;
   --accent-l: 60%;
-  --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l)); /* #38bdf8 */
+  --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
 
   --success-h: 142;
   --success-s: 71%;
   --success-l: 45%;
-  --success: hsl(var(--success-h), var(--success-s), var(--success-l)); /* #22c55e */
+  --success: hsl(var(--success-h), var(--success-s), var(--success-l));
 
   --danger-h: 350;
   --danger-s: 89%;
   --danger-l: 60%;
-  --danger: hsl(var(--danger-h), var(--danger-s), var(--danger-l)); /* #f43f5e */
+  --danger: hsl(var(--danger-h), var(--danger-s), var(--danger-l));
 
   --text-main: hsl(210, 40%, 98%);
   --text-muted: hsl(215, 20%, 65%);
@@ -48,31 +46,28 @@
   --input-border: rgba(255, 255, 255, 0.08);
   --input-focus-border: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
 
-  /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
 
-  /* Transitions */
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Light Theme Override Variables */
 .light-theme {
   --bg-color-h: 220;
   --bg-color-s: 25%;
   --bg-color-l: 95%;
-  --bg-color: hsl(var(--bg-color-h), var(--bg-color-s), var(--bg-color-l)); /* #f1f3f7 */
+  --bg-color: hsl(var(--bg-color-h), var(--bg-color-s), var(--bg-color-l));
 
   --primary-glow: rgba(99, 102, 241, 0.15);
   --secondary-glow: rgba(139, 92, 246, 0.12);
 
-  --text-main: hsl(222, 47%, 12%); /* Dark slate */
-  --text-muted: hsl(215, 16%, 35%); /* Soft slate */
+  --text-main: hsl(222, 47%, 12%);
+  --text-muted: hsl(215, 16%, 35%);
   --text-dim: hsl(215, 12%, 55%);
 
-  --card-bg: rgba(255, 255, 255, 0.75); /* Frosted white */
+  --card-bg: rgba(255, 255, 255, 0.75);
   --card-border: rgba(99, 102, 241, 0.18);
   --card-border-glow: rgba(99, 102, 241, 0.35);
 
@@ -85,7 +80,6 @@
 .light-theme body::after {
   opacity: 0.3;
 }
-
 
 * {
   box-sizing: border-box;
@@ -104,7 +98,6 @@ body {
   position: relative;
 }
 
-/* Stunning Interactive Animated Mesh Backgrounds */
 body::before,
 body::after {
   content: "";
@@ -152,7 +145,6 @@ body::after {
   }
 }
 
-/* Premium Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -172,7 +164,6 @@ body::after {
   background: rgba(99, 102, 241, 0.4);
 }
 
-/* Universal Layout Container for React Root */
 #root {
   min-height: 100vh;
   width: 100%;
@@ -181,7 +172,6 @@ body::after {
   position: relative;
 }
 
-/* Auth Pages Centering Layout */
 .centered-auth-layout {
   min-height: 100vh;
   width: 100%;
@@ -192,7 +182,6 @@ body::after {
   padding: 2rem 1rem;
 }
 
-/* App Workspace layout */
 .app-workspace {
   display: flex;
   flex-direction: column;
@@ -211,7 +200,6 @@ body::after {
   box-sizing: border-box;
 }
 
-/* Global Loading Spinner Styles */
 .spinner {
   width: 32px;
   height: 32px;
@@ -222,7 +210,6 @@ body::after {
   display: inline-block;
 }
 
-/* Spinner inside primary and submit buttons */
 .primary-btn .spinner,
 .submit-btn .spinner,
 .button-spinner {
@@ -236,11 +223,7 @@ body::after {
   vertical-align: middle;
 }
 
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-
-

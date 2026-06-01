@@ -4,28 +4,23 @@ import { api } from "../utils/api";
 import "./ProductsCatalog.css";
 
 export default function ProductsCatalog() {
-  // Catalog Data & Loading States
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
-  // Search/Filter State
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Modal / Drawer Active States
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  // Form Fields
   const [sku, setSku] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
 
-  // Fetch Products
   const fetchProducts = async () => {
     setLoading(true);
     setError("");
@@ -47,7 +42,6 @@ export default function ProductsCatalog() {
     fetchProducts();
   }, []);
 
-  // Form Clear
   const clearForm = () => {
     setSku("");
     setName("");
@@ -57,13 +51,11 @@ export default function ProductsCatalog() {
     setEditingProduct(null);
   };
 
-  // Open Add
   const handleOpenAdd = () => {
     clearForm();
     setIsModalOpen(true);
   };
 
-  // Open Edit
   const handleOpenEdit = (p) => {
     setEditingProduct(p);
     setSku(p.sku);
@@ -74,7 +66,6 @@ export default function ProductsCatalog() {
     setIsModalOpen(true);
   };
 
-  // Create or Update Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -121,7 +112,6 @@ export default function ProductsCatalog() {
     }
   };
 
-  // Delete product
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     setError("");
@@ -139,7 +129,6 @@ export default function ProductsCatalog() {
     }
   };
 
-  // Filter products client-side
   const filteredProducts = products.filter((p) => {
     const term = searchTerm.toLowerCase().trim();
     if (!term) return true;
@@ -152,7 +141,6 @@ export default function ProductsCatalog() {
 
   return (
     <div className="tab-pane products-pane animate-fade-in">
-      {/* View Header */}
       <div className="view-header">
         <div className="header-meta">
           <span className="header-breadcrumbs">Workspace / Products</span>
@@ -165,7 +153,6 @@ export default function ProductsCatalog() {
         </div>
       </div>
 
-      {/* Action Bar */}
       <div className="action-bar">
         <div className="search-box">
           <Search size={18} className="search-icon" />
@@ -185,7 +172,6 @@ export default function ProductsCatalog() {
         </button>
       </div>
 
-      {/* Notification Banners */}
       {error && (
         <div className="alert-message error-alert animate-fade-in">
           <AlertTriangle size={18} />
@@ -202,7 +188,6 @@ export default function ProductsCatalog() {
         </div>
       )}
 
-      {/* Data Ingestion Grid */}
       {loading ? (
         <div className="pane-loader"><div className="spinner"></div></div>
       ) : filteredProducts.length === 0 ? (
@@ -254,7 +239,6 @@ export default function ProductsCatalog() {
         </div>
       )}
 
-      {/* ADD / EDIT PRODUCT DYNAMIC MODAL */}
       {isModalOpen && (
         <div className="modal-backdrop animate-fade-in">
           <div className="modal-drawer glass-card animate-scale-up">
@@ -276,7 +260,7 @@ export default function ProductsCatalog() {
                     value={sku}
                     onChange={(e) => setSku(e.target.value)}
                     required
-                    disabled={!!editingProduct} // SKU immutable on edit
+                    disabled={!!editingProduct}
                   />
                 </div>
               </div>

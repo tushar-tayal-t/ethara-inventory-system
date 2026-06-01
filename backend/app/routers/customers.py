@@ -23,21 +23,15 @@ router = APIRouter(
 
 @router.post("/", response_model=CustomerAuthEnvelope, status_code=status.HTTP_201_CREATED)
 def register_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
-    """
-    Register a new customer in the system.
-    Validates that the email address is unique, generates a token, and returns enveloped data.
-    """
-    # Normalize email to lowercase for consistent checking
     normalized_email = customer.email.strip().lower()
-    
-    # Check if email is already registered
+
     existing_customer = db.query(Customer).filter(Customer.email.ilike(normalized_email)).first()
     if existing_customer:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="A customer with this email address already exists."
         )
-    
+
     db_customer = Customer(
         name=customer.name.strip(),
         email=normalized_email,
@@ -47,10 +41,9 @@ def register_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
     db.add(db_customer)
     db.commit()
     db.refresh(db_customer)
-    
-    # Generate auth token containing customer credentials
+
     token = generate_token({"id": db_customer.id, "email": db_customer.email})
-    
+
     return {
         "success": True,
         "message": "Customer registered successfully.",
@@ -62,23 +55,17 @@ def register_customer(customer: CustomerCreate, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=CustomerAuthEnvelope)
 def login_customer(login_data: CustomerLogin, db: Session = Depends(get_db)):
-    """
-    Log in an existing customer using their email address.
-    Generates a token and returns enveloped customer details.
-    """
     normalized_email = login_data.email.strip().lower()
-    
-    # Find the customer and verify password
+
     db_customer = db.query(Customer).filter(Customer.email.ilike(normalized_email)).first()
     if not db_customer or not verify_password(login_data.password, db_customer.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password."
         )
-    
-    # Generate auth token containing customer credentials
+
     token = generate_token({"id": db_customer.id, "email": db_customer.email})
-    
+
     return {
         "success": True,
         "message": "Login successful.",
@@ -93,9 +80,6 @@ def get_customers(
     db: Session = Depends(get_db),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    """
-    Retrieve all customers, enveloped.
-    """
     customers = db.query(Customer).all()
     return {
         "success": True,
@@ -105,13 +89,10 @@ def get_customers(
 
 @router.get("/{id}", response_model=CustomerResponseEnvelope)
 def get_customer(
-    id: int, 
+    id: int,
     db: Session = Depends(get_db),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    """
-    Retrieve a customer by their ID, enveloped.
-    """
     db_customer = db.query(Customer).filter(Customer.id == id).first()
     if not db_customer:
         raise HTTPException(
@@ -126,13 +107,10 @@ def get_customer(
 
 @router.delete("/{id}", response_model=CustomerResponseEnvelope, status_code=status.HTTP_200_OK)
 def delete_customer(
-    id: int, 
+    id: int,
     db: Session = Depends(get_db),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    """
-    Delete a customer by their ID, enveloped.
-    """
     db_customer = db.query(Customer).filter(Customer.id == id).first()
     if not db_customer:
         raise HTTPException(
@@ -147,7 +125,6 @@ def delete_customer(
         "data": None
     }
 
-# Create a reusable ImportValidator dependency for Customers
 customer_import_validator = ImportValidator(
     schema=CustomerImportRow,
     model=Customer,
@@ -159,10 +136,6 @@ async def validate_customers_import(
     validation_result: ImportValidationResult = Depends(customer_import_validator),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    """
-    Validate a bulk customer import file (CSV or JSON) in dry-run mode.
-    Returns a comprehensive validation report including error counts and details.
-    """
     return {
         "success": True,
         "message": "Customer import file validated successfully.",
@@ -175,10 +148,6 @@ async def import_customers(
     db: Session = Depends(get_db),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    """
-    Import customers from a validated CSV or JSON file.
-    Only writes to the database if the entire file is valid (100% clean data).
-    """
     if not validation_result.is_valid:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -187,15 +156,13 @@ async def import_customers(
                 "errors": [err.model_dump() for err in validation_result.errors]
             }
         )
-    
-    # Bulk insert all customers in a single database transaction
+
     try:
         new_customers = []
         for record in validation_result.valid_records:
-            # Hash password if provided, else use default password
             raw_password = record.get("password") or "Password123"
             hashed_pwd = hash_password(raw_password)
-            
+
             customer = Customer(
                 name=record["name"].strip(),
                 email=record["email"].strip().lower(),
@@ -204,7 +171,7 @@ async def import_customers(
             )
             new_customers.append(customer)
             db.add(customer)
-        
+
         db.commit()
         return {
             "success": True,
@@ -217,4 +184,3 @@ async def import_customers(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Database transaction error during customer import: {str(e)}"
         )
-

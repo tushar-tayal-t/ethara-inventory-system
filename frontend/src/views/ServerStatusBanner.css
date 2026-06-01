@@ -44,16 +44,12 @@
   opacity: 0.85;
 }
 
-/* Status Specific Themes */
-
-/* 1. Checking */
 .status-checking {
   background: rgba(56, 189, 248, 0.08);
   border-color: rgba(56, 189, 248, 0.2);
   color: var(--accent);
 }
 
-/* 2. Warning / Waking up */
 .status-warning {
   background: rgba(245, 158, 11, 0.08);
   border-color: rgba(245, 158, 11, 0.25);
@@ -64,7 +60,6 @@
   color: #fbbf24;
 }
 
-/* 3. Ready */
 .status-ready {
   background: rgba(34, 197, 94, 0.08);
   border-color: rgba(34, 197, 94, 0.25);
@@ -72,7 +67,6 @@
   animation: success-pulse-animation 0.5s ease-in-out;
 }
 
-/* 4. Error */
 .status-error {
   background: rgba(244, 63, 94, 0.08);
   border-color: rgba(244, 63, 94, 0.25);
@@ -87,7 +81,6 @@
   color: var(--text-muted);
 }
 
-/* Small Loading Spinner inside banner */
 .banner-spinner {
   width: 16px;
   height: 16px;
@@ -98,7 +91,6 @@
   flex-shrink: 0;
 }
 
-/* Retry Button */
 .retry-btn {
   display: inline-flex;
   align-items: center;
@@ -125,7 +117,6 @@
   transform: translateY(0);
 }
 
-/* Helper Animations */
 .animate-pulse {
   animation: pulse-light 1.5s infinite ease-in-out;
 }
@@ -161,7 +152,6 @@
   100% { transform: scale(1); }
 }
 
-/* Responsive adjustments */
 @media (max-width: 480px) {
   .server-status-banner {
     width: 90%;

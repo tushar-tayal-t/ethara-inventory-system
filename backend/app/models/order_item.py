@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, ForeignKey, Float
-# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import relationship
 from app.core.database import Base
 
@@ -12,10 +11,8 @@ class OrderItem(Base):
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
 
-    # Establish relationships
     order = relationship("Order", back_populates="items")
     product = relationship("Product")
     @property
     def product_name(self):
         return self.product.name if self.product else None
-

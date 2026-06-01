@@ -11,13 +11,10 @@ import ServerStatusBanner from "./views/ServerStatusBanner";
 import { api, clearAuthData } from "./utils/api";
 
 export default function App() {
-  // Load initial customer session
   const [currentCustomer, setCurrentCustomer] = useState(api.getCurrentUser());
 
-  // Global Theme State
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
-  // Sync theme changes with DOM (enforce dark mode for public login/signup pages)
   useEffect(() => {
     if (currentCustomer) {
       document.documentElement.classList.toggle("light-theme", theme === "light");
@@ -31,12 +28,10 @@ export default function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  // Authentication success handler
   const handleAuthSuccess = () => {
     setCurrentCustomer(api.getCurrentUser());
   };
 
-  // Sign out session handler
   const handleLogout = () => {
     clearAuthData();
     setCurrentCustomer(null);
@@ -45,7 +40,6 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* PUBLIC ACCESS CHANNELS (Redirect to dashboard overview if already logged in) */}
         <Route
           path="/login"
           element={
@@ -73,7 +67,6 @@ export default function App() {
           }
         />
 
-        {/* SECURE SYSTEM WORKSPACE (Redirect to login if NOT authenticated) */}
         <Route
           path="/*"
           element={
@@ -91,7 +84,6 @@ export default function App() {
                     <Route path="/products" element={<ProductsCatalog />} />
                     <Route path="/orders" element={<OrdersTracker />} />
                     <Route path="/import" element={<BulkImportPortal />} />
-                    {/* Fallback to Overview inside secure session */}
                     <Route path="*" element={<Navigate to="/overview" replace />} />
                   </Routes>
                 </main>
@@ -105,4 +97,3 @@ export default function App() {
     </Router>
   );
 }
-

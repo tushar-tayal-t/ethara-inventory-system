@@ -27,7 +27,6 @@ def get_dashboard_summary(
     db: Session = Depends(get_db),
     current_customer: Customer = Depends(get_current_customer)
 ):
-    # Enforce database fresh fetching and prevent caching
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "0"
@@ -37,38 +36,31 @@ def get_dashboard_summary(
     Requires an active, authenticated customer Bearer token.
     """
     try:
-        # 1. Product stats
         total_products = db.query(Product).count()
         total_stock = db.query(func.sum(Product.stock)).scalar() or 0
-        
-        # SQL expression to sum (price * stock) across all products
+
         total_value = db.query(func.sum(Product.price * Product.stock)).scalar() or 0.0
 
-        # 2. Customer stats
         total_customers = db.query(Customer).count()
 
-        # 3. Order stats
         total_orders = db.query(Order).count()
         total_revenue = db.query(func.sum(Order.total_amount)).scalar() or 0.0
 
-        # 4. Low stock products alert (stock < 10)
         low_stock_products = db.query(Product).filter(Product.stock < 10).all()
         low_stock_list = [
             {
-                "id": p.id, 
-                "name": p.name, 
-                "sku": p.sku, 
+                "id": p.id,
+                "name": p.name,
+                "sku": p.sku,
                 "stock": p.stock,
                 "price": p.price
             }
             for p in low_stock_products
         ]
 
-        # 5. Recent orders breakdown (last 5)
         recent_orders_db = db.query(Order).order_by(Order.created_at.desc()).limit(5).all()
         recent_orders_list = []
         for o in recent_orders_db:
-            # Eagerly loaded relationships, include items with product_name
             items_summary = []
             for item in o.items:
                 items_summary.append({
@@ -85,7 +77,6 @@ def get_dashboard_summary(
                 "items": items_summary
             })
 
-        # 5. Top selling products (limit 5)
         top_selling_query = (
             db.query(
                 Product.id,
@@ -112,7 +103,6 @@ def get_dashboard_summary(
                 "revenue": float(prod.revenue),
                 "inventory_value": round(float(prod.price * prod.stock), 2)
             })
-
 
         return {
             "success": True,
