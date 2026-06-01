@@ -1,0 +1,330 @@
+.import-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.flex-align-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-logo-icon {
+  color: var(--accent);
+}
+
+.import-config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Ingestion type toggles */
+.import-toggle-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  padding: 0.25rem;
+  border-radius: 12px;
+}
+
+.toggle-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.toggle-select-option:hover {
+  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.toggle-select-option.active {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: 0 4px 10px -3px var(--primary-glow);
+}
+
+/* Drag Zone target */
+.import-drag-zone {
+  position: relative;
+  border: 2px dashed var(--card-border);
+  border-radius: 16px;
+  padding: 2.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.01);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.import-drag-zone:hover {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.03);
+}
+
+.drag-icon-container {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-upload-icon {
+  color: var(--text-dim);
+}
+
+.active-json {
+  color: #f59e0b;
+  filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.3));
+}
+
+.active-csv {
+  color: #10b981;
+  filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.3));
+}
+
+.drag-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 250px;
+}
+
+.drag-main-lbl {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.drag-sub-lbl {
+  font-size: 0.775rem;
+  color: var(--text-dim);
+}
+
+.file-hidden-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Validation Diagnostics reports */
+.centered-import-helper {
+  padding: 3.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.info-import-logo {
+  color: var(--primary);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.report-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.report-summary-boxes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.sum-box {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sum-val {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.sum-lbl {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-top: 0.125rem;
+  text-transform: uppercase;
+}
+
+.bg-green-border { border-color: rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.03); }
+.green-text { color: var(--success); }
+
+.bg-red-border { border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.03); }
+.red-text { color: var(--danger); }
+
+.bg-orange-border { border-color: rgba(245, 158, 11, 0.25); background: rgba(245, 158, 11, 0.03); }
+.orange-text { color: #f59e0b; }
+
+/* Callout cards */
+.report-alert-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.success-callout {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--text-main);
+}
+
+.success-callout .callout-icon {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+.error-callout {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--text-main);
+}
+
+.error-callout .callout-icon {
+  color: var(--danger);
+  flex-shrink: 0;
+}
+
+.callout-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.callout-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.callout-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Conflict Breakdown table */
+.report-errors-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.table-header-lbl {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.report-table th {
+  background: rgba(255, 255, 255, 0.015);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.report-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-muted);
+}
+
+.report-table tr:last-child td {
+  border-bottom: none;
+}
+
+.report-table .bold {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.report-table .code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.775rem;
+  color: var(--accent);
+}
+
+.red-cell-val {
+  font-family: ui-monospace, monospace;
+  font-size: 0.775rem;
+  color: var(--danger);
+  word-break: break-all;
+}
+
+.error-message-cell {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.commit-import-btn {
+  padding: 0.875rem;
+}
+
+@media (max-width: 1000px) {
+  .import-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}

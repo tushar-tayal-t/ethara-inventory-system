@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.tox/
+.venv/
+env/
+venv/
+
+# Environment files
+.env
+.env.*
+
+# Git
+.git
+.gitignore
+
+# IDEs/Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local databases/data files
+*.db
+*.sqlite3
+inventory.db

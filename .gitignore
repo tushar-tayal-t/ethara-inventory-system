@@ -1,0 +1,36 @@
+# Python Virtual Environments
+backend/.venv/
+backend/env/
+backend/venv/
+backend/ENV/
+
+# Python Cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Node Dependencies
+frontend/node_modules/
+frontend/dist/
+
+# Local databases
+**/*.db
+**/*.sqlite3
+backend/inventory.db
+
+# Environment Secrets
+backend/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
