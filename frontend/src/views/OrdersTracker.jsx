@@ -226,7 +226,12 @@ export default function OrdersTracker() {
                   <td className="dim-txt">{o.created_at ? new Date(o.created_at).toLocaleString() : "-"}</td>
                   <td className="center action-cells">
                     {o.status !== "cancelled" && (
-                      <button className="action-btn delete-icon-btn cancel-order-btn" onClick={() => handleCancelOrder(o.id)} title="Cancel & Restore Stock">
+                      <button
+                        className="action-btn delete-icon-btn cancel-order-btn"
+                        onClick={() => handleCancelOrder(o.id)}
+                        disabled={o.status === "completed"}
+                        title={o.status === "completed" ? "Completed orders cannot be cancelled" : "Cancel & Restore Stock"}
+                      >
                         <X size={14} /> Cancel Order
                       </button>
                     )}
