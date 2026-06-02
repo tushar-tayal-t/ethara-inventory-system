@@ -1,0 +1,207 @@
+/* CustomersManagement.css */
+
+.customers-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.customer-detail-drawer {
+  max-width: 680px; /* Wider to comfortably show profile + order history table */
+  width: 100%;
+  padding: 2.25rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.profile-summary-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.profile-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile-summary-item.full-width {
+  grid-column: span 2;
+}
+
+.profile-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-value {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.profile-value.code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.section-divider {
+  margin: 1.5rem 0 1rem 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.5rem;
+}
+
+.orders-history-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.no-orders-txt {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.005);
+  border: 1px dashed var(--card-border);
+  border-radius: 12px;
+}
+
+.mini-order-card {
+  background: rgba(255, 255, 255, 0.008);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transition: all var(--transition-fast);
+}
+
+.mini-order-card:hover {
+  background: rgba(255, 255, 255, 0.015);
+  border-color: rgba(56, 189, 248, 0.15);
+}
+
+.mini-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.mini-order-id {
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.mini-order-date {
+  font-size: 0.775rem;
+  color: var(--text-dim);
+}
+
+.mini-order-amount {
+  font-family: ui-monospace, monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.mini-order-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-items-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.825rem;
+  color: var(--text-muted);
+}
+
+.order-item-name {
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-item-qty {
+  font-family: ui-monospace, monospace;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Detail icon button customization */
+.detail-icon-btn {
+  color: var(--primary);
+}
+
+.detail-icon-btn:hover {
+  background: rgba(147, 51, 234, 0.12);
+  border-color: rgba(147, 51, 234, 0.25);
+}
+
+/* Status badge pills inside order history */
+.status-pill {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.status-pill.pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-pill.completed {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-pill.cancelled {
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+/* Modal form validation errors spacing */
+.form-field-error {
+  font-size: 0.725rem;
+  color: var(--danger);
+  margin-top: 0.25rem;
+}

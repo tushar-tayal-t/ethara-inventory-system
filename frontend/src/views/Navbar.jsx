@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Sparkles, Sun, Moon, LogOut, BarChart3, Box, ShoppingBag, UploadCloud } from "lucide-react";
+import { Sparkles, Sun, Moon, LogOut, BarChart3, Box, ShoppingBag, UploadCloud, Users } from "lucide-react";
 import "./Navbar.css";
 
 export default function Navbar({ currentCustomer, onLogout, theme, onThemeToggle }) {
@@ -53,6 +53,19 @@ export default function Navbar({ currentCustomer, onLogout, theme, onThemeToggle
             <>
               <ShoppingBag size={16} />
               <span>Orders Tracker</span>
+              {isActive && <span className="active-dot-glow"></span>}
+            </>
+          )}
+        </NavLink>
+
+        <NavLink
+          to="/customers"
+          className={({ isActive }) => `navbar-tab-btn ${isActive ? "active" : ""}`}
+        >
+          {({ isActive }) => (
+            <>
+              <Users size={16} />
+              <span>Customers</span>
               {isActive && <span className="active-dot-glow"></span>}
             </>
           )}

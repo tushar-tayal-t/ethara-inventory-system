@@ -153,6 +153,19 @@ export const api = {
     });
   },
 
+  createCustomer: async (customerData) => {
+    return await request("/customers/", {
+      method: "POST",
+      body: JSON.stringify(customerData),
+    });
+  },
+
+  getCustomer: async (id) => {
+    return await request(`/customers/${id}`, {
+      method: "GET",
+    });
+  },
+
   getOrders: async () => {
     return await request("/orders/", {
       method: "GET",

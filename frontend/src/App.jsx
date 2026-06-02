@@ -6,6 +6,7 @@ import Navbar from "./views/Navbar";
 import DashboardOverview from "./views/DashboardOverview";
 import ProductsCatalog from "./views/ProductsCatalog";
 import OrdersTracker from "./views/OrdersTracker";
+import CustomersManagement from "./views/CustomersManagement";
 import BulkImportPortal from "./views/BulkImportPortal";
 import ServerStatusBanner from "./views/ServerStatusBanner";
 import { api, clearAuthData } from "./utils/api";
@@ -83,6 +84,7 @@ export default function App() {
                     <Route path="/overview" element={<DashboardOverview />} />
                     <Route path="/products" element={<ProductsCatalog />} />
                     <Route path="/orders" element={<OrdersTracker />} />
+                    <Route path="/customers" element={<CustomersManagement />} />
                     <Route path="/import" element={<BulkImportPortal />} />
                     <Route path="*" element={<Navigate to="/overview" replace />} />
                   </Routes>
