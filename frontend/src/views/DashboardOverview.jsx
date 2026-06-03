@@ -50,10 +50,6 @@ export default function DashboardOverview() {
           <h1 className="header-title">System Dashboard Summary</h1>
         </div>
         <div className="header-actions">
-          <div className="live-indicator" title="Overview metrics automatically refresh in real-time">
-            <span className="live-dot"></span>
-            <span className="live-text">Live Sync</span>
-          </div>
           <button
             className={`icon-btn refresh-btn ${isRefreshing ? "spinning" : ""}`}
             onClick={() => fetchAnalytics()}
@@ -61,9 +57,6 @@ export default function DashboardOverview() {
           >
             <RefreshCw size={18} />
           </button>
-          <div className="header-date">
-            📅 {new Date().toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
-          </div>
         </div>
       </div>
 
