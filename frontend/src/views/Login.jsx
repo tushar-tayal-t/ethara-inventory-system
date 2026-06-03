@@ -5,8 +5,8 @@ import { api } from "../utils/api";
 import "./Login.css";
 
 export default function Login({ onToggle, onAuthSuccess }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("tushar@gmail.com");
+  const [password, setPassword] = useState("password");
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
